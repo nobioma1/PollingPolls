@@ -1,0 +1,40 @@
+{% extends 'poll_base.html' %}
+
+{% block poll_content %}
+{% if user.is_authenticated %}
+    <div class="container top">
+      <div class="alert alert-info">
+        <p>Available Poll Questions</p>
+      </div>
+      {% if poll_question_list %}
+        <ul>
+          {% for question in poll_question_list %}
+            <li class="card-header"><a href="{% url 'pollapp:poll_detail' question.id%}">{{ question.question_text }}</a>
+              <br><small>{{question.question_date}}</small>
+            </li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No polls are available.</p>
+      {% endif %}
+    </div>
+{%else%}
+  <div class="container top">
+    <div class="alert alert-info">
+      <p>Available Poll Questions</p>
+      <p><a href="{%url 'login'%}">Login</a> or <a href="{%url 'accounts:signup'%}">Create Account</a> to take Poll</p>
+    </div>
+    {% if poll_question_list %}
+      <ul>
+        {% for question in poll_question_list %}
+          <li class="card-header">{{ question.question_text }}
+            <br><small>{{question.question_date}}</small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No polls are available.</p>
+    {% endif %}
+{% endif %}
+  </div>
+{% endblock poll_content%}

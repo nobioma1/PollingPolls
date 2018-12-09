@@ -1,0 +1,74 @@
+{% extends 'base.html'%}
+{% block content %}
+<header class="bg-primary text-white">
+  <div class="container text-center">
+    <h1>Welcome to Polling Polls</h1>
+    <p class="lead">Answer questions and help us with our research to make the world a better place.</p>
+  </div>
+</header>
+
+{% if user.is_authenticated %}
+&nbsp;
+<section id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Polls Page</h5>
+                  <p class="card-text">Welcome, <em><strong>{{user.first_name}} {{user.last_name}}</strong></em><br> Click to Start...</p>
+                  <a href="{% url 'pollapp:poll_list'%}" class="btn btn-outline-success">Start</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">View Polls</h5>
+                  <p class="card-text">View Polls you've taken before</p>
+                  <a href="{% url 'pollapp:taken_poll_list' %}" class="btn btn-outline-primary">Polls</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+{%else%}
+&nbsp;
+<section id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="row">
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Create an Account or Login</h5>
+                  <p class="card-text">To partake in the poll</p>
+                  <a href="{% url 'login'%}" class="btn btn-outline-primary">Login</a>
+                  <a href="{% url 'accounts:signup'%}" class="btn btn-outline-primary">Signup</a>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">View Polls</h5>
+                  <p class="card-text">Click to View existing poll results</p>
+                  <a href="{% url 'pollapp:poll_list' %}" class="btn btn-outline-primary">Polls</a>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock content %}

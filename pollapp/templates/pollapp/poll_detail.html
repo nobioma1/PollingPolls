@@ -1,0 +1,26 @@
+{% extends 'poll_base.html' %}
+
+{% block poll_content %}
+  <div class="container top">
+    <div class="alert alert-success">
+      <h2>{{ question.question_text }}</h2>
+    </div>
+
+    {% if error_message %}
+      <p style="width:500px;" class="alert alert-danger text-center">
+        <strong><em>{{ error_message }}</em></strong>
+      </p>
+    {% endif %}
+
+    <form action="{% url 'pollapp:vote' question.id %}" method="post">
+      {% csrf_token %}
+      {% for choice in question.choice_set.all %}
+      <div class="card-header">
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+      </div>
+    {% endfor %}
+    <input class="btn btn-lg btn-outline-success" type="submit" value="Vote" />
+    </form>
+  </div>
+{% endblock poll_content%}

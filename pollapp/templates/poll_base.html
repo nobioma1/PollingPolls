@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{% block content%}
+{% if user.is_authenticated%}
+  <!-- Side navigation -->
+  <div class="sidenav">
+    <div class="top">
+      <a href="{% url 'pollapp:taken_poll_list' %}">View Already Taking Polls</a>
+    </div>
+  </div>
+{%endif%}
+
+<!-- Page content -->
+<div class="main">
+  {% block poll_content%}
+
+  {% endblock poll_content%}
+</div>
+
+{% endblock content%}

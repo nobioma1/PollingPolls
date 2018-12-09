@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container top">
+    <div class="alert alert-info">
+      <p>You've Taken these polls</p>
+    </div>
+    {% if taken_poll_list %}
+      <ul>
+        {% for poll in taken_poll_list %}
+          <li class="card-header"><a href="{% url 'pollapp:poll_report' poll.poll_id%}">{{ poll.poll }}</a>
+            <br><small><em>You took this poll on {{poll.time_taken}}</em></small>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>You've not taken any poll yet. Click <a href="{%url 'pollapp:poll_list'%} "></a> to start.</p>
+    {% endif %}
+  </div>
+{% endblock content%}

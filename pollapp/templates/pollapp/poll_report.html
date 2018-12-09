@@ -1,0 +1,27 @@
+{% extends 'poll_base.html' %}
+
+{% block poll_content %}
+  <div class="col-md-4 float-right container top">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">Thanks for voting!!</h4>
+      <p>Aww yeah, you successfully voted on "{{ question.question_text }}"</p>
+  <hr>
+  <p class="mb-0">Whenever you want to, be sure to come back and vote on more polls</p>
+</div>
+
+  </div>
+
+  <div class="col-md-8 float-left top">
+    <h1>{{ question.question_text }}</h1>
+    <ul>
+      {% for choice in question.choice_set.all %}
+        <li class="alert alert-success text-center">
+          <h4>
+            <span class="choice_text">{{ choice.choice_text|upper }}</span><br>
+            <span class="choice_votes badge badge-light btn btn-lg">{{ choice.votes }}</span>
+            <span class="choice_vote_text">vote{{ choice.votes|pluralize }}</span>
+          </h4>
+        </li>
+      {% endfor %}
+    </ul>
+{% endblock poll_content%}
